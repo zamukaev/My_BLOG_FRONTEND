@@ -1,17 +1,13 @@
-import React from 'react';
+import React from "react";
+import Router from "./components/Router/Router";
 
-
-
-
-import './GlobalStyle.scss';
+import "./GlobalStyle.scss";
 
 function App() {
 	return (
-		<div className="wrapper">
-
-
-
-		</div >
+		<div className="app">
+			<Router />
+		</div>
 	);
 }
 

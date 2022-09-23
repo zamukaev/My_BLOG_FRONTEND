@@ -1,0 +1,33 @@
+.addPostContainer{
+	margin-top: 110px;
+	background: #FFFFFF;
+	padding:20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	.upload{
+		align-self: flex-start;
+		margin-bottom: 25px;
+	}
+
+	.tagInput{
+		width: 600px;
+		
+		margin-bottom: 10px;
+	}
+	.titleInput{
+		width: 600px;
+		margin-bottom: 10px;
+	}
+	.text{
+		border: 1px solid #3333;
+		padding: 12px;
+		margin-bottom: 26px;
+		&:focus{
+			outline-color: #0d80d8;
+		}
+	}
+	.submitBtn{
+		align-self: flex-end;
+	}
+}

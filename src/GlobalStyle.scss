@@ -58,45 +58,17 @@ textarea {
 	-moz-appearance: none;
 	appearance: none;
 }
-.wrapper{
-
-
-	background: #F6F6F6;
+body{
+	background: #e5e5e5;
 }
-
-.header{
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 50;
-	width: 100%;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) ;
-	background: #ffff;
-	height: 60px;
-	.header__container{
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		.nav .menu{
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			li{
-				margin-right: 14px;
-				padding: 5px;
-				&:hover{
-					background: #2a78d014;
-				}
-				a{
-					color:#1565c0;
-				}
-				&:last-child{
-					margin-right: 0px;
-				}
-			}
-		}
-	}
+.app{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 14px;
+	color: #333333;
 }
-.main{
-	
+.container{
+	margin-top: 110px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 16px;
+	color: #333333;
 }

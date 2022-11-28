@@ -1,17 +1,14 @@
 import { FC } from "react";
-import Layout from "../Layout/Layout"
+
 import { Routes, Route } from "react-router-dom"
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import Registration from "../../pages/Registration/Registration";
 import FullPost from "../../pages/FullPost/FullPost";
 import AddPost from "../../pages/AddPost/AddPost";
+import Layout from "../Layout/Layout";
 import Header from "../Header/Header";
-interface LayoutProps {
-
-}
-
-const Router: FC<LayoutProps> = () => {
+const Router: FC = () => {
 	return (
 		<Layout>
 			<Header />
@@ -20,9 +17,11 @@ const Router: FC<LayoutProps> = () => {
 				<Route path="/login" element={<Login />} />
 				<Route path="/registration" element={<Registration />} />
 				<Route path="/post/:id" element={<FullPost />} />
-				<Route path="/add-post" element={<AddPost />} />
+				<Route path="/add-post/" element={<AddPost />} />
+				<Route path="/post/:id/edit" element={<AddPost />} />
 			</Routes>
 		</Layout>
+
 	);
 }
 

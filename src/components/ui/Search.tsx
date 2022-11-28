@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 
-export default function FormPropsTextFields() {
+function FormPropsTextFields() {
 	const onChange = (value: string) => {
 		console.log(value);
 	}
@@ -19,3 +19,4 @@ export default function FormPropsTextFields() {
 
 	);
 }
+export default React.memo(FormPropsTextFields);

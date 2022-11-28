@@ -1,18 +1,28 @@
 .addPostContainer{
+	flex:1 0 100%;
+	align-self: center;
 	margin-top: 110px;
 	background: #FFFFFF;
 	padding:20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	.upload{
+	.buttons{
 		align-self: flex-start;
 		margin-bottom: 25px;
+		.upload {
+			margin-right: 15px;
+		}
 	}
-
+	
+	.image{
+		margin-bottom: 25px;
+		max-width: 550px;
+	}
+	
 	.tagInput{
-		width: 600px;
-		
+		width: 100%;
+
 		margin-bottom: 10px;
 	}
 	.titleInput{

@@ -1,20 +1,67 @@
 import { FC } from 'react'
-import MyInput from '../../components/ui/MyInput';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useForm } from "react-hook-form";
+
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { Navigate } from 'react-router-dom';
+import { fetchRegisterUser } from '../../redux/action-creator/authAction';
+
+import { IUserData } from '../../types/types';
 
 import styles from "./Registration.module.scss";
 
-interface RegistrationProps {
 
-}
-const onSubmitHandler = () => {
-	console.log('register')
-}
-const Registration: FC<RegistrationProps> = () => {
+type FormData = {
+	username: string;
+	password: string;
+};
+
+const Registration: FC = () => {
+	const dispatch = useAppDispatch();
+	const { data, error, isLoading } = useAppSelector(state => state.auth);
+	const { register, setValue, handleSubmit, formState: { errors, isValid } } = useForm<FormData>({
+		defaultValues: {
+			username: '',
+			password: ''
+		},
+		mode: 'onChange'
+	});
+
+	const onSubmitHandler = (values: IUserData) => {
+		dispatch(fetchRegisterUser(values));
+	};
+	if (data) {
+		return < Navigate to="/login" />
+	}
+
 	return (
-		<div className={styles.container}>
+		<form onSubmit={handleSubmit(onSubmitHandler)} className={styles.container}>
 			<h2 className={styles.title}>Registration</h2>
-			<MyInput buttonText="regestration" onClick={onSubmitHandler} />
-		</div>
+			<TextField
+				type="input"
+				error={Boolean(errors.username?.message)}
+				className={styles.username}
+				id="outlined-name"
+				label="Username"
+				helperText={errors.username?.message}
+				fullWidth
+				{...register('username', { required: 'Geben Sie Username ein', minLength: 3 })}
+			/>
+			<TextField
+				type="input"
+				className={styles.password}
+				error={Boolean(errors.password?.message)}
+				id="outlined-uncontrolled"
+				label="Password"
+				helperText={errors.password?.message}
+				fullWidth
+				{...register('password', { required: 'Geben Sie Password ein', minLength: 6 })}
+			/>
+			<Button type='submit' variant="contained">
+				Registration
+			</Button>
+		</form>
 	);
 }
 

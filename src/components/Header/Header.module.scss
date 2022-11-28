@@ -19,12 +19,24 @@
 		flex: 0 1 33.333%;
 		align-self: center;
 	}
+	.left{
+			flex: 0 1 33.333%;
+			display: flex;
+			justify-content: end;
+			align-items: center;
+		.user{
+			margin-right: 15px;
+			font-size: 18px;
+			font-weight: 600;
+		}
+	}
 	.login{
 		flex: 0 1 33.333%;
 		display: flex;
 		justify-content: end;
 		align-items: center;
 		.btn{
+			align-self: center;
 			margin-right: 5px;
 			&:last-child{
 				margin-right: 0px;

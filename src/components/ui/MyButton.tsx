@@ -1,15 +1,14 @@
-import { FC } from "react";
+import { FC, memo } from "react";
+
 import Button from '@mui/material/Button';
+
 import { Link } from "react-router-dom";
 
-interface MyButtonProps {
-}
-
-const MyButton: FC<MyButtonProps> = () => {
+const MyButton: FC = () => {
 	return (
 		<Link to="/add-post" style={{
 			position: 'fixed',
-			zIndex: '100px',
+			zIndex: '100',
 			top: '126px',
 			right: '100px'
 		}}>
@@ -18,4 +17,4 @@ const MyButton: FC<MyButtonProps> = () => {
 	);
 }
 
-export default MyButton;
+export default memo(MyButton);

@@ -1,10 +1,10 @@
 import { FC } from 'react';
+
 import { Navigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
-import { useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { isAuthSelector } from '../../redux/slices/AuthSlice';
@@ -44,7 +44,7 @@ const Login: FC = () => {
 
 		return <Navigate to="/" />
 	}
-	console.log(errors)
+
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)} className={styles.container}>
 			<h2 className={styles.title}>Login</h2>

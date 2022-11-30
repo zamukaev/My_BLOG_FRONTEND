@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, memo, useCallback } from "react"
 import { Link } from "react-router-dom";
 
 import EditIcon from '@mui/icons-material/Edit';
@@ -7,12 +7,12 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import classNames from "classnames";
 
 import { setIsActive } from "../../redux/slices/PostSlice";
-import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { useParserDate } from "../../hooks/useParserDate";
 import { IUserData } from "../../types/types";
 
 import styles from "./Post.module.scss";
+import { fetchPostsByTag } from "../../redux/action-creator/authAction";
 
 interface PostProps {
 	isFullPost?: boolean;
@@ -28,13 +28,17 @@ interface PostProps {
 
 const Post: FC<PostProps> = ({ isFullPost, id, body, tag, title, user, viewsCount, createdTime, picture }) => {
 
-	const dispatch = useDispatch()
+	const dispatch = useAppDispatch()
 	const userId = useAppSelector((state) => state.auth.data?._id);
 	const date = useParserDate(createdTime);
 
-	const onDeleteHandler = () => {
+	const onDeleteHandler = useCallback(() => {
 		dispatch(setIsActive(true));
-	}
+	}, [])
+
+	const onGetByTagHandler = useCallback((arg: string) => {
+		dispatch(fetchPostsByTag(arg))
+	}, [])
 
 	return (
 		<div className={classNames(styles.post, { [styles.fullPost]: isFullPost })}>
@@ -73,7 +77,7 @@ const Post: FC<PostProps> = ({ isFullPost, id, body, tag, title, user, viewsCoun
 				</Link>
 
 				<div className={styles.footer}>
-					{tag && tag.map(item => <div onClick={(() => console.log("ok"))} key={item} className={styles.tags}>#<span>{item}</span></div>)}
+					{tag && tag.map(item => <div onClick={() => (!isFullPost && onGetByTagHandler(item))} key={item} className={styles.tags}>#<span>{item}</span></div>)}
 					<div className={styles.views}>views:<span>{viewsCount && viewsCount}</span></div>
 				</div>
 			</div>
@@ -82,4 +86,4 @@ const Post: FC<PostProps> = ({ isFullPost, id, body, tag, title, user, viewsCoun
 	);
 }
 
-export default Post;
+export default memo(Post);

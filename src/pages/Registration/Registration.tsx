@@ -1,16 +1,16 @@
-import { FC } from 'react'
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { FC } from 'react';
+
+import { Navigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { Navigate } from 'react-router-dom';
-import { fetchRegisterUser } from '../../redux/action-creator/authAction';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchRegisterUser } from '../../redux/action-creator/authAction';
 import { IUserData } from '../../types/types';
 
 import styles from "./Registration.module.scss";
-
 
 type FormData = {
 	username: string;
@@ -31,6 +31,7 @@ const Registration: FC = () => {
 	const onSubmitHandler = (values: IUserData) => {
 		dispatch(fetchRegisterUser(values));
 	};
+
 	if (data) {
 		return < Navigate to="/login" />
 	}

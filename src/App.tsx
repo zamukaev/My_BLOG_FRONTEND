@@ -1,7 +1,6 @@
-import React from "react";
 import Router from "./components/Router/Router";
 
-import "./GlobalStyle.scss";
+import "./globalStyle.scss";
 
 function App() {
 	return (

@@ -28,5 +28,6 @@ export interface PostState {
 	isLoading: boolean;
 	error: null | string;
 	isActive: boolean;
+	filteredValue: string | null;
 }
 

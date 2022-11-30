@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IData, IUserData } from "../../types/types";
 
 import { fetchAuthMe, fetchRegisterUser, fetchUserData } from "../action-creator/authAction";
-
-
+import { IData, IUserData } from "../../types/types";
 
 const initialState: IData = {
 	data: null,

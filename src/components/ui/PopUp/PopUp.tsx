@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Button } from "@mui/material";
 
 import classNames from "classnames";
@@ -25,4 +25,4 @@ const PopUp: FC<PopUpProps> = ({ isActive, onCancelHandler, onDeleteHandler, err
 	);
 }
 
-export default PopUp;
+export default memo(PopUp);

@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback, memo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Post from "../../components/Post/Post";
@@ -13,29 +13,31 @@ import { IPost } from "../../types/types";
 import axios from "../../api/axios";
 
 
-
-
-
-
-
 const FullPost: FC = () => {
-	const { id } = useParams();
-	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
+
 	const [post, setPost] = useState<IPost>();
 	const [isLoaded, setIsloaded] = useState<boolean>(true);
 	const [isError, setIsError] = useState<string | null>(null);
+
+	const { id } = useParams();
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
 	const { isActive } = useAppSelector(state => state.posts);
 
-	const onDeleteHandler = (event: any): void => {
+	useEffect(() => {
+		fetchPostById(id);
+	}, []);
+
+	const onDeleteHandler = useCallback((): void => {
 		dispatch(fetchRemovePost(id));
 		dispatch(setIsActive(false));
 		navigate("/");
-	}
+	}, [id, isActive]);
 
-	const onCancelHandler = (): void => {
+	const onCancelHandler = useCallback((): void => {
 		dispatch(setIsActive(false));
-	}
+	}, [isActive]);
 
 	const fetchPostById = async (id: string | undefined) => {
 		try {
@@ -52,9 +54,6 @@ const FullPost: FC = () => {
 		dispatch(setIsActive(true));
 	}
 
-	useEffect(() => {
-		fetchPostById(id);
-	}, []);
 	return (
 		<>
 			<PopUp
@@ -80,4 +79,4 @@ const FullPost: FC = () => {
 	);
 }
 
-export default FullPost;
+export default memo(FullPost);

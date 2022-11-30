@@ -15,19 +15,35 @@ import styles from "./AddPost.module.scss";
 
 
 const AddPost: FC = () => {
-	const navigate = useNavigate();
-	const { id } = useParams();
-
 	const [picture, setPicture] = useState<string>('');
 	const [title, setTitle] = useState<string>('');
 	const [body, setBody] = useState<string>('');
 	const [tags, setTags] = useState<string>('');
-	const [imageUrl, setImageUrl] = useState<string>('');
 	const [isError, setIsError] = useState<string | null>(null);
 
+	const navigate = useNavigate();
+	const { id } = useParams();
 	const isAuth = useAppSelector(isAuthSelector);
 
 	const isEdit = Boolean(id);
+
+	useEffect(() => {
+		if (isEdit) {
+			try {
+				axios.get(`/api/posts/${id}`)
+					.then(res => res.data)
+					.then(data => {
+						setTitle(data.title)
+						setBody(data.body)
+						setTags(data.tags)
+						setPicture(data.picture);
+					});
+			} catch (error: any) {
+				setIsError(error.message);
+			}
+		}
+	}, []);
+
 
 	const handleChangeFile = async (event: any) => {
 		try {
@@ -53,24 +69,6 @@ const AddPost: FC = () => {
 
 		navigate(`/post/${data._id}`);
 	}
-
-	useEffect(() => {
-		if (isEdit) {
-			try {
-				axios.get(`/api/posts/${id}`)
-					.then(res => res.data)
-					.then(data => {
-						setTitle(data.title)
-						setBody(data.body)
-						setTags(data.tags)
-						setPicture(data.picture);
-					});
-			} catch (error: any) {
-				setIsError(error.message);
-			}
-		}
-	}, []);
-
 
 	if (!isAuth && !localStorage.getItem("token")) {
 		return <Navigate to="/login" />
